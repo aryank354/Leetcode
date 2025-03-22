@@ -6,6 +6,7 @@ void helperAtoi(int n, const string &s, long long &ans, bool is_negative) {
     
     int digit = s[n] - '0';
     
+    // Check for overflow/underflow before updating ans
     if (!is_negative) {
         if (ans > (long long)INT_MAX / 10 ||
            (ans == (long long)INT_MAX / 10 && digit > 7)) {
