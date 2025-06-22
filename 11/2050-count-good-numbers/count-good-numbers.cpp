@@ -43,11 +43,11 @@ class Solution {
 public:
     int countGoodNumbers(long long n) {
         // In your style, n = total digits, start from 1-based logic
-        long long evenPos = n / 2;           // positions like 2, 4, 6...
-        long long oddPos = (n + 1) / 2;       // positions like 1, 3, 5...
+        long long oddPos = n / 2;           // positions like 2, 4, 6...
+        long long evenPos = (n + 1) / 2;       // positions like 1, 3, 5...
 
         // Odd positions get 5 choices, even positions get 4
-        return (modPow(5, oddPos) * modPow(4, evenPos)) % MOD;
+        return (modPow(4, oddPos) * modPow(5, evenPos)) % MOD;
     }
 };
 
