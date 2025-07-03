@@ -36,16 +36,16 @@ public:
         }
 
         string op1 = op;
-        int s = op.length();
+        int s = op1.length();
         for(int i = 0 ; i < s ; i++) {
-            if(op[i] == 'z') {
-                op.push_back('a');
+            if(op1[i] == 'z') {
+                op1.push_back('a');
             } else {
-                op.push_back(op[i] + 1);
+                op1.push_back(op1[i] + 1);
             }
         }
 
-        return func(k , op);
+        return func(k , op1);
     }
 
     char kthCharacter(int k) {
