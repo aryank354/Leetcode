@@ -1,28 +1,64 @@
 class Solution {
 public:
-    bool solve(vector<int>&nums , int n , int wt , vector<vector<int>>&t){
-       if (wt == 0) return true;
-       if (n == 0) return false;
-       if(t[n][wt] != -1){
-        return t[n][wt];
-       }
+    // bool solve(vector<int>&nums , int n , int wt , vector<vector<int>>&t){
+    //    if (wt == 0) return true;
+    //    if (n == 0) return false;
+    //    if(t[n][wt] != -1){
+    //     return t[n][wt];
+    //    }
 
-        if(nums[n-1] <= wt){
-            return t[n][wt] = solve(nums , n-1 , wt-nums[n-1], t) || solve(nums , n-1 , wt , t);
-        }else{
-            return t[n][wt]=solve(nums , n-1 , wt , t);
-        }
-    }
+    //     if(nums[n-1] <= wt){
+    //         return t[n][wt] = solve(nums , n-1 , wt-nums[n-1], t) || solve(nums , n-1 , wt , t);
+    //     }else{
+    //         return t[n][wt]=solve(nums , n-1 , wt , t);
+    //     }
+    // }
+    // bool canPartition(vector<int>& nums) {
+    //     int n = nums.size();
+    //     int sum = 0;
+    //     for(int i = 0 ; i<n ; i++){
+    //         sum += nums[i];
+    //     }
+    //     if(sum %2 != 0){
+    //         return false;
+    //     }
+    //     vector<vector<int>>t(n+1 , vector<int>((sum/2) + 1 , -1));
+    //     return solve(nums, n , sum/2 , t);
+    // }
+
     bool canPartition(vector<int>& nums) {
         int n = nums.size();
         int sum = 0;
         for(int i = 0 ; i<n ; i++){
             sum += nums[i];
         }
-        if(sum %2 != 0){
+
+        if(sum % 2 != 0){
             return false;
         }
-        vector<vector<int>>t(n+1 , vector<int>((sum/2) + 1 , -1));
-        return solve(nums, n , sum/2 , t);
+        int wt = sum/2;
+        vector<vector<bool>>t(n+1 , vector<bool>(wt+1 , false));
+
+        for(int i = 0 ; i<n+1 ; i++){
+            t[i][0] = true;
+        }
+
+        for(int i = 1 ; i<n+1 ; i++){
+            for(int j = 1 ; j<wt+1 ; j++){
+                if(nums[i-1] <= j){
+                    t[i][j] = t[i-1][j -nums[i-1]] || t[i-1][j];
+                    
+                }
+                else {
+                    t[i][j] = t[i-1][j];
+                }
+
+            }
+        }
+
+        return t[n][wt];
+
+            
+
     }
 };
